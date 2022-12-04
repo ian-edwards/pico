@@ -3,10 +3,13 @@ import led
 import wlan
 from time import sleep
 
-log.info('init system...')
-log.info('init wlan...')
-(wlan_connected, wlan_status) = wlan.connect()
-log.info(wlan_connected)
+log.info('system init...')
+log.info('wlan init...')
+(wlan_ssid, wlan_connected, wlan_status) = wlan.connect()
+if wlan_connected:
+    log.info(f'wlan connected')
+else:
+    log.error(f'wlan error: {wlan_status}')
 
 while True:
     led.toggle()
