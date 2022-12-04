@@ -1,12 +1,14 @@
 from machine import Pin
 
-_led = Pin("LED", Pin.OUT)
+__all__ = ['on', 'off', 'toggle']
 
-def led_on():
-    _led.on()
+led = Pin('LED', Pin.OUT)
 
-def led_off():
-    _led.off()
+def on():
+    led.on()
 
-def led_toggle():
-    _led.toggle()
+def off():
+    led.off()
+
+def toggle():
+    led.toggle()

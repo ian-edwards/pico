@@ -1,7 +1,13 @@
-from led import *
+import log
+import led
 import wlan
 from time import sleep
 
+log.info('init system...')
+log.info('init wlan...')
+(wlan_connected, wlan_status) = wlan.connect()
+log.info(wlan_connected)
+
 while True:
-    led_toggle()
+    led.toggle()
     sleep(1)

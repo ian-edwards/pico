@@ -1,9 +1,10 @@
-from network import WLAN, STA_IF
-from network_ssid import *
-from network_password import *
+import network
+from secret import NETWORK_SSID, NETWORK_PASSWORD
+from ucollections import namedtuple
 
-wlan = WLAN(STA_IF)
-wlan.active(True)
-wlan.connect(NETWORK_SSID, NETWORK_PASSWORD)
-
-print(wlan.isconnected())
+def connect():
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(True)
+    wlan.connect(NETWORK_SSID, NETWORK_PASSWORD)
+    Result = namedtuple('WlanConnectResult', 'connected status')
+    return Result(wlan.isconnected(), wlan.status()) # todo stringify status
