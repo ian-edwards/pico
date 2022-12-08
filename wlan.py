@@ -1,7 +1,7 @@
 import network
 from time import ticks_ms, ticks_add, ticks_diff, sleep
 from ucollections import namedtuple
-from secret import NETWORK_SSID, NETWORK_PASSWORD
+from secrets import NETWORK_SSID, NETWORK_PASSWORD
 from settings import WLAN_CONNECT_TIMEOUT
 
 def connect():

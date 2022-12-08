@@ -1,0 +1,2 @@
+NETWORK_SSID="Edwards WiFi"
+NETWORK_PASSWORD="GoToInternet777"
