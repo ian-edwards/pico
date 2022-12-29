@@ -6,10 +6,17 @@ from settings import WLAN_CONNECT_TIMEOUT
 
 def connect():
     timeout = ticks_add(ticks_ms(), WLAN_CONNECT_TIMEOUT)
+    print(timeout)
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
     wlan.connect(NETWORK_SSID, NETWORK_PASSWORD)
-    while not wlan.isconnected() and ticks_diff(timeout, ticks_ms()) > 0:
+    while not (wlan.isconnected() or _istimeout(timeout)):
         pass
-    Result = namedtuple('WlanConnectResult', 'ssid connected status')
-    return Result(NETWORK_SSID, wlan.isconnected(), wlan.status()) # todo stringify status
+    if _istimeout(timeout):
+        wlan.disconnect()
+    Result = namedtuple('WlanConnectResult', 'ok, status, ssid')
+    statuscode = wlan.status()
+    return Result(wlan.isconnected(), wlan.status(), NETWORK_SSID)
+    
+def _istimeout(timeout):
+    ticks_diff(timeout, ticks_ms()) <= 0
